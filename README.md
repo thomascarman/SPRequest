@@ -4,11 +4,17 @@ This library is used to make SharePoint API request simpler.
 
 ## Usage / Examples
 
-Initialize SPRequest with SharePoint Site URL (optional)
+There are 2 options for initializing the scripts. If no url defined it will try to use the SharePoint URL available.
 
 ```js
-// If URL is undefined it will use the SharePoint URL available
+// create a new instance passing in a desired url.
+import SPRequest from "SPRequest.js";
 const spReq = new SPRequest("URL");
+
+// Or use the predefined value spRequest
+import { spRequest as spReq } from "SPRequest.js";
+
+// start using spReq. see below.
 ```
 
 To get a list's data. By default you will receive up to 100 items.

@@ -17,7 +17,7 @@ export default class List {
     add(options) {
         if (!options || typeof options !== "object") {
             const error = new Error(
-                "To Add Item(s) to list send as object or object Array"
+                "To Update/Add Item(s) to list send as object or object Array"
             );
             error.description =
                 "See Documentation at https://github.com/thomascarman/SPRequest";
@@ -29,6 +29,43 @@ export default class List {
                     "Include List name and data to be added"
                 ).description(
                     "See Documentation at https://github.com/thomascarman/SPRequest"
+                );
+            } else {
+                options.type = "POST";
+                options = formatOptions(this.defaultUrl, options);
+
+                let deferred = $.Deferred();
+                makeRequest(options, {}, deferred);
+                return deferred.promise();
+            }
+        }
+    }
+
+    update(options) {
+        if(!options || typeof options !== "object") {
+            const error = new Error(
+                "See Documentation at https://github.com/thomascarman/SPRequest"
+            );
+            error.description =
+                "To Update Item(s) to list send as object or object Array";
+
+            console.log(error);
+            throw error;
+        } else if(!options.id) {
+            const error = new Error(
+                "See Documentation at https://github.com/thomascarman/SPRequest"
+            );
+            error.description =
+                "Update requires an Id of the item to be updated";
+
+            console.log(error);
+            throw error;
+        } else {
+            if (!options.data || !options.list) {
+                throw new Error(
+                    "See Documentation at https://github.com/thomascarman/SPRequest"
+                    ).description(
+                        "Include List name and data to be added"
                 );
             } else {
                 options.type = "POST";

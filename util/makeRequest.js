@@ -6,30 +6,34 @@ export const makeRequest = (options, items, deferred) => {
             Accept: "application/json;odata=verbose",
             "Content-Type": "application/json;odata=verbose"
         },
-        success: data => {
-            const results = data.d.results;
-            items["Title"] = options.title || options.list;
+        success: (data, status, xhr) => {
+            if(data) {
+                const results = data.d.results;
+                items["Title"] = options.title || options.list;
 
-            if (!results) {
-                items["results"] = data.d;
-                items["Title"] = options.title || data.d.Title || data.d.Id;
-            } else {
-                for (let i in results) {
-                    items["Items"] = items["Items"] || {};
+                if (!results) {
+                    items["results"] = data.d;
+                    items["Title"] = options.title || data.d.Title || data.d.Id;
+                } else {
+                    for (let i in results) {
+                        items["Items"] = items["Items"] || {};
 
-                    if (results[i].Id) {
-                        items["Items"][results[i].Id] = results[i];
-                    } else {
-                        items["Items"][i] = results[i];
+                        if (results[i].Id) {
+                            items["Items"][results[i].Id] = results[i];
+                        } else {
+                            items["Items"][i] = results[i];
+                        }
                     }
                 }
-            }
 
-            if (data.d["__next"] && options.getAll) {
-                options.url = data.d["__next"];
-                makeRequest(options, items, deferred);
+                if (data.d["__next"] && options.getAll) {
+                    options.url = data.d["__next"];
+                    makeRequest(options, items, deferred);
+                } else {
+                    deferred.resolve(items);
+                }
             } else {
-                deferred.resolve(items);
+                deferred.resolve(`Item Updated.`);
             }
         },
         error: (XMLHttpRequest, textStatus, errorThrown) => {

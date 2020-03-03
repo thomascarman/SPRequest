@@ -48,6 +48,8 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
               )}/${options.list}')/Files?`
             : `${defaultUrl}/_api/web/lists/getbytitle('${options.list}')/Items`;
 
+        if(options.id) options.url += `(${options.id})`;
+
         if(options.type == "GET")
             options.url += `?$select=${options.select}&$expand=${options.expand}&$filter=${options.filter}&$orderby=${options.order}&$top=${options.top}`;
     }

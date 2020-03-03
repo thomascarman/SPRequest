@@ -15,18 +15,29 @@ export default class List {
     }
 
     add(options) {
-        let deferred = $.Deferred();
         if (!options || typeof options !== "object") {
             const error = new Error(
                 "To Add Item(s) to list send as object or object Array"
             );
             error.description =
                 "See Documentation at https://github.com/thomascarman/SPRequest";
-            deferred.reject(error);
-        }
-        options = formatOptions(this.defaultUrl, options);
 
-        makeRequest(options, {}, deferred);
-        return deferred.promise();
+            throw error;
+        } else {
+            if (!options.data || !options.list) {
+                throw new Error(
+                    "Include List name and data to be added"
+                ).description(
+                    "See Documentation at https://github.com/thomascarman/SPRequest"
+                );
+            } else {
+                options.type = "POST";
+                options = formatOptions(this.defaultUrl, options);
+
+                let deferred = $.Deferred();
+                makeRequest(options, {}, deferred);
+                return deferred.promise();
+            }
+        }
     }
 }

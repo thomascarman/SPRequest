@@ -1,6 +1,7 @@
 import * as util from "./utilities.js";
 
 export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
+
     if (!options || options === "" || options === "lists") {
         options = {
             list: "lists"
@@ -14,6 +15,10 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
         throw new Error(`List can not be a number`);
     } else if (Array.isArray(options)) {
         // Array Handler
+    }
+
+    if(options.data) {
+        options.data = Object.assign({ '__metadata': util.GetItemTypeForListName(options.list) }, options.data );
     }
 
     options.type = options.type ? options.type : "GET";
@@ -41,9 +46,10 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
             ? `${defaultUrl}/_api/web/GetFolderByServerRelativeUrl('${util.GetServerRelativeUrl(
                   defaultUrl
               )}/${options.list}')/Files?`
-            : `${defaultUrl}/_api/web/lists/getbytitle('${options.list}')/Items?`;
+            : `${defaultUrl}/_api/web/lists/getbytitle('${options.list}')/Items`;
 
-        options.url += `$select=${options.select}&$expand=${options.expand}&$filter=${options.filter}&$orderby=${options.order}&$top=${options.top}`;
+        if(options.type == "GET")
+            options.url += `?$select=${options.select}&$expand=${options.expand}&$filter=${options.filter}&$orderby=${options.order}&$top=${options.top}`;
     }
 
     if (

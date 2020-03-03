@@ -1,13 +1,10 @@
 export const makeRequest = (options, items, deferred) => {
-    return $.ajax({
+    const request = {
         url: options.url,
         type: options.type,
         headers: {
             Accept: "application/json;odata=verbose",
-            "Content-Type": "application/json",
-            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-            "IF-MATCH": "*",
-            "X-HTTP-Method": "MERGE"
+            "Content-Type": "application/json;odata=verbose"
         },
         success: data => {
             const results = data.d.results;
@@ -38,5 +35,17 @@ export const makeRequest = (options, items, deferred) => {
         error: (XMLHttpRequest, textStatus, errorThrown) => {
             deferred.reject(new Error(`${textStatus}: ${errorThrown}`));
         }
-    });
+    };
+
+    if (options.type == "POST") {
+        request.headers["X-RequestDigest"] = $("#__REQUESTDIGEST").val();
+        request.data = JSON.stringify(options.data);
+
+        if (options.id) {
+            request.headers["IF-MATCH"] = "*";
+            request.headers["X-HTTP-Method"] = "MERGE";
+        }
+    }
+
+    return $.ajax(request);
 };

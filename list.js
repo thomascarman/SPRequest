@@ -8,29 +8,48 @@ export default class List {
 
     get(options, getAll, getFiles) {
         if (Array.isArray(options)) {
-            let deferred = $.Deferred();
-            let listData = {};
+            let deferred = new $.Deferred();
+            let listData = {},
+                promises = [],
+                fOptions = [],
+                fulfulled = 0,
+                optLen = options.length;
 
-            options.forEach((opts, index, arr) => {
-                let dfd = $.Deferred();
-
-                opts = formatOptions(this.defaultUrl, opts, getAll, getFiles);
-                listData[opts.list] = listData[opts.list] || {};
-
-                makeRequest(opts, listData[opts.list], dfd);
-
-                dfd.promise().then(() => {
-                    if (Object.keys(listData).length == arr.length) {
-                        deferred.resolve(listData);
-                    }
-                });
+            options.forEach((opts, index) => {
+                fOptions[index] = formatOptions(
+                    this.defaultUrl,
+                    opts,
+                    getAll,
+                    getFiles
+                );
+                promises[index] = () => {
+                    let dfd = new $.Deferred();
+                    makeRequest(fOptions[index], {}, dfd);
+                    return dfd.promise();
+                };
             });
+
+            if (optLen === 0) {
+                deferred.resolve(listData);
+            } else {
+                promises.forEach((promise, index) => {
+                    promise().then(data => {
+                        listData[
+                            fOptions[index].title || fOptions[index].list
+                        ] = data;
+                        fulfulled++;
+                        if (fulfulled === optLen) {
+                            deferred.resolve(listData);
+                        }
+                    });
+                });
+            }
 
             return deferred.promise();
         } else {
             options = formatOptions(this.defaultUrl, options, getAll, getFiles);
 
-            let deferred = $.Deferred();
+            let deferred = new $.Deferred();
             makeRequest(options, {}, deferred);
             return deferred.promise();
         }

@@ -1,7 +1,10 @@
-import Lists from "./list.js";
+import Lists from "list";
 
 export default class SPRequest {
-    constructor(defaultUrl) {
+    defaultUrl: string;
+    lists: Lists;
+
+    constructor(defaultUrl?: string) {
         if (!defaultUrl || defaultUrl === "") {
             if (_spPageContextInfo) {
                 this.defaultUrl = _spPageContextInfo.siteAbsoluteUrl;
@@ -15,7 +18,7 @@ export default class SPRequest {
         if (this.defaultUrl) this.lists = new Lists(this.defaultUrl);
     }
 
-    updateDefaultUrl(defaultUrl) {
+    updateDefaultUrl(defaultUrl: string) {
         this.defaultUrl = defaultUrl;
         this.lists.defaultUrl = defaultUrl;
     }

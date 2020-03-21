@@ -1,8 +1,8 @@
-import Lists from "list";
+import List from "list";
 
 export default class SPRequest {
     defaultUrl: string;
-    lists: Lists;
+    lists: List;
 
     constructor(defaultUrl?: string) {
         if (!defaultUrl || defaultUrl === "") {
@@ -15,7 +15,7 @@ export default class SPRequest {
             this.defaultUrl = defaultUrl;
         }
 
-        if (this.defaultUrl) this.lists = new Lists(this.defaultUrl);
+        this.lists = new List(this.defaultUrl);
     }
 
     updateDefaultUrl(defaultUrl: string) {

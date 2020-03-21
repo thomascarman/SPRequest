@@ -1,4 +1,4 @@
-import * as util from "./utilities.js";
+import * as util from "utilities";
 export interface Options {
     list: string;
     data?: {

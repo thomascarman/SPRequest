@@ -13,7 +13,7 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
     } else if (!isNaN(options)) {
         throw new Error(`List can not be a number`);
     } else if (Array.isArray(options)) {
-        // Array Handler
+        throw new Error(`List can not contain arrays`);
     }
 
     if (options.data) {

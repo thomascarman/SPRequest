@@ -1,7 +1,10 @@
 import * as util from "./utilities.js";
-
 export interface Options {
     list: string;
+    data?: {
+        __metadata?: object;
+        [key: string]: any;
+    };
     [key: string]: any;
 }
 
@@ -25,10 +28,7 @@ export const formatOptions = (
     }
 
     if (options.data) {
-        options.data = Object.assign(
-            { __metadata: util.GetItemTypeForListName(options.list) },
-            options.data
-        );
+        options.data.__metadata = util.GetItemTypeForListName(options.list);
     }
 
     options.baseUrl = options.baseUrl ? options.baseUrl : defaultUrl;

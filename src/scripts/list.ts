@@ -2,11 +2,17 @@ import { makeRequest } from "./util/makeRequest";
 import { formatOptions, Options } from "./util/formatOptions";
 
 export default class List {
-    constructor(defaultUrl) {
+    defaultUrl: string;
+
+    constructor(defaultUrl: string) {
         this.defaultUrl = defaultUrl;
     }
 
-    get(options, getAll, getFiles) {
+    get(
+        options: string | any[] | Options,
+        getAll?: string | boolean,
+        getFiles?: string | boolean
+    ) {
         if (Array.isArray(options)) {
             let deferred = new $.Deferred();
             let listData = {},
@@ -55,7 +61,7 @@ export default class List {
         }
     }
 
-    add(options) {
+    add(options: Options) {
         if (!options || typeof options !== "object") {
             const error = new Error(
                 "To Update/Add Item(s) to list send as object or object Array"
@@ -82,7 +88,7 @@ export default class List {
         }
     }
 
-    update(options) {
+    update(options: Options) {
         if (!options || typeof options !== "object") {
             const error = new Error(
                 "See Documentation at https://github.com/thomascarman/SPRequest"

@@ -1,3 +1,11 @@
+class ItemList {
+    constructor(items) {
+        this.Title = items.Title;
+        this.List = items.List;
+        this.Items = items.Items;
+    }
+}
+
 export const makeRequest = (options, items, deferred) => {
     const request = {
         url: options.url,
@@ -7,9 +15,10 @@ export const makeRequest = (options, items, deferred) => {
             "Content-Type": "application/json;odata=verbose"
         },
         success: (data, status, xhr) => {
-            if(data) {
+            if (data && data.d) {
                 const results = data.d.results;
                 items["Title"] = options.title || options.list;
+                items["List"] = options.list;
 
                 if (!results) {
                     items["results"] = data.d;
@@ -30,7 +39,7 @@ export const makeRequest = (options, items, deferred) => {
                     options.url = data.d["__next"];
                     makeRequest(options, items, deferred);
                 } else {
-                    deferred.resolve(items);
+                    deferred.resolve(new ItemList(items));
                 }
             } else {
                 deferred.resolve(`Item Updated.`);

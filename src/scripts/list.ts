@@ -64,18 +64,14 @@ export default class List {
     add(options: Options) {
         if (!options || typeof options !== "object") {
             const error = new Error(
-                "To Update/Add Item(s) to list send as object or object Array"
+                "To Update/Add Item(s) to list send as object or object Array. See Documentation at https://github.com/thomascarman/SPRequest."
             );
-            error.description =
-                "See Documentation at https://github.com/thomascarman/SPRequest";
 
             throw error;
         } else {
             if (!options.data || !options.list) {
                 throw new Error(
-                    "Include List name and data to be added"
-                ).description(
-                    "See Documentation at https://github.com/thomascarman/SPRequest"
+                    "Include List name and data to be added. See Documentation at https://github.com/thomascarman/SPRequest."
                 );
             } else {
                 options.type = "POST";
@@ -91,27 +87,23 @@ export default class List {
     update(options: Options) {
         if (!options || typeof options !== "object") {
             const error = new Error(
-                "See Documentation at https://github.com/thomascarman/SPRequest"
+                "To Update Item(s) to list send as object or object Array. See Documentation at https://github.com/thomascarman/SPRequest."
             );
-            error.description =
-                "To Update Item(s) to list send as object or object Array";
 
             console.log(error);
             throw error;
         } else if (!options.id) {
             const error = new Error(
-                "See Documentation at https://github.com/thomascarman/SPRequest"
+                "Update requires an Id of the item to be updated. See Documentation at https://github.com/thomascarman/SPRequest."
             );
-            error.description =
-                "Update requires an Id of the item to be updated";
 
             console.log(error);
             throw error;
         } else {
             if (!options.data || !options.list) {
                 throw new Error(
-                    "See Documentation at https://github.com/thomascarman/SPRequest"
-                ).description("Include List name and data to be added");
+                    "Include List name and data to be added. See Documentation at https://github.com/thomascarman/SPRequest."
+                );
             } else {
                 options.type = "POST";
                 options = formatOptions(this.defaultUrl, options);

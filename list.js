@@ -42,7 +42,7 @@ export default class List {
     }
 
     update(options) {
-        if(!options || typeof options !== "object") {
+        if (!options || typeof options !== "object") {
             const error = new Error(
                 "See Documentation at https://github.com/thomascarman/SPRequest"
             );
@@ -51,7 +51,7 @@ export default class List {
 
             console.log(error);
             throw error;
-        } else if(!options.id) {
+        } else if (!options.id) {
             const error = new Error(
                 "See Documentation at https://github.com/thomascarman/SPRequest"
             );
@@ -64,9 +64,7 @@ export default class List {
             if (!options.data || !options.list) {
                 throw new Error(
                     "See Documentation at https://github.com/thomascarman/SPRequest"
-                    ).description(
-                        "Include List name and data to be added"
-                );
+                ).description("Include List name and data to be added");
             } else {
                 options.type = "POST";
                 options = formatOptions(this.defaultUrl, options);

@@ -1,5 +1,5 @@
-import { makeRequest } from "./util/makeRequest.js";
-import { formatOptions } from "./util/formatOptions.js";
+import { makeRequest } from "../../util/makeRequest.js";
+import { formatOptions } from "../../util/formatOptions.js";
 
 export default class List {
     constructor(defaultUrl) {

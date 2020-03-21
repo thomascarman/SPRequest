@@ -1,27 +1,44 @@
+import { Options } from "./formatOptions";
+
+interface Request {
+    [key: string]: any;
+}
+
 class ItemList {
-    constructor(items) {
+    Title?: string;
+    List?: string;
+    Items?: any;
+    Results?: any;
+
+    constructor(items: { Title?: string; List?: string; Items?: Object }) {
         this.Title = items.Title;
         this.List = items.List;
         this.Items = items.Items;
     }
 }
 
-export const makeRequest = (options, items, deferred) => {
-    const request = {
+export const makeRequest = (
+    options: Options,
+    items: ItemList,
+    deferred: any
+) => {
+    const request: Request = {
         url: options.url,
         type: options.type,
         headers: {
             Accept: "application/json;odata=verbose",
             "Content-Type": "application/json;odata=verbose"
         },
-        success: (data, status, xhr) => {
+        success: (data: {
+            d: { [x: string]: any; results: any; Title: any; Id: any };
+        }) => {
             if (data && data.d) {
                 const results = data.d.results;
                 items["Title"] = options.title || options.list;
                 items["List"] = options.list;
 
                 if (!results) {
-                    items["results"] = data.d;
+                    items["Results"] = data.d;
                     items["Title"] = options.title || data.d.Title || data.d.Id;
                 } else {
                     for (let i in results) {
@@ -45,7 +62,7 @@ export const makeRequest = (options, items, deferred) => {
                 deferred.resolve(`Item Updated.`);
             }
         },
-        error: (XMLHttpRequest, textStatus, errorThrown) => {
+        error: (XMLHttpRequest: any, textStatus: any, errorThrown: any) => {
             deferred.reject(new Error(`${textStatus}: ${errorThrown}`));
         }
     };

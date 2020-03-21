@@ -23,6 +23,7 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
         );
     }
 
+    options.baseUrl = options.baseUrl ? options.baseUrl : defaultUrl;
     options.type = options.type ? options.type : "GET";
     options.select = options.select ? options.select : "";
     options.expand = options.expand ? options.expand : "";
@@ -45,10 +46,12 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
 
     if (!options.url) {
         options.url = options.getFiles
-            ? `${defaultUrl}/_api/web/GetFolderByServerRelativeUrl('${util.GetServerRelativeUrl(
-                  defaultUrl
+            ? `${
+                  options.baseUrl
+              }/_api/web/GetFolderByServerRelativeUrl('${util.GetServerRelativeUrl(
+                  options.baseUrl
               )}/${options.list}')/Files?`
-            : `${defaultUrl}/_api/web/lists/getbytitle('${options.list}')/Items`;
+            : `${options.baseUrl}/_api/web/lists/getbytitle('${options.list}')/Items`;
 
         if (options.id) options.url += `(${options.id})`;
 
@@ -61,9 +64,9 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
         options.list === "siteusers" ||
         options.list === "currentuser"
     ) {
-        options.url = `${defaultUrl}/_api/web/${options.list}`;
+        options.url = `${options.baseUrl}/_api/web/${options.list}`;
     } else if (options.list === "lists") {
-        options.url = `${defaultUrl}/_api/web/lists`;
+        options.url = `${options.baseUrl}/_api/web/lists`;
     }
 
     return options;

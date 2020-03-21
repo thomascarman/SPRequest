@@ -39,7 +39,7 @@ export default class List {
                 deferred.resolve(listData);
             } else {
                 promises.forEach((promise, index) => {
-                    promise().then(data => {
+                    promise().then((data: any) => {
                         listData[
                             fOptions[index].title || fOptions[index].list
                         ] = data;

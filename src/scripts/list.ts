@@ -15,9 +15,9 @@ export default class List {
     ) {
         if (Array.isArray(options)) {
             let deferred = $.Deferred();
-            let listData = {},
-                promises = [],
-                fOptions = [],
+            let listData: any = {},
+                promises: any[] = [],
+                fOptions: Options[] = [],
                 fulfulled = 0,
                 optLen = options.length;
 

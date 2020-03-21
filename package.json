@@ -2,5 +2,9 @@
     "name": "SPRequest",
     "version": "0.0.0",
     "private": false,
-    "dependencies": {}
+    "dependencies": {},
+    "devDependencies": {
+        "@types/jquery": "^3.3.33",
+        "@types/sharepoint": "^2016.1.8"
+    }
 }

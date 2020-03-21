@@ -1,6 +1,16 @@
 import * as util from "./utilities.js";
 
-export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
+export interface Options {
+    list: string;
+    [key: string]: any;
+}
+
+export const formatOptions = (
+    defaultUrl: string,
+    options: string | Options,
+    getAll?: string | boolean,
+    getFiles?: string | boolean
+) => {
     if (!options || options === "" || options === "lists") {
         options = {
             list: "lists"
@@ -10,8 +20,6 @@ export const formatOptions = (defaultUrl, options, getAll, getFiles) => {
         options = {
             list: options
         };
-    } else if (!isNaN(options)) {
-        throw new Error(`List can not be a number`);
     } else if (Array.isArray(options)) {
         throw new Error(`List can not contain arrays`);
     }

@@ -7,11 +7,33 @@ export default class List {
     }
 
     get(options, getAll, getFiles) {
-        options = formatOptions(this.defaultUrl, options, getAll, getFiles);
+        if (Array.isArray(options)) {
+            let deferred = $.Deferred();
+            let listData = {};
 
-        let deferred = $.Deferred();
-        makeRequest(options, {}, deferred);
-        return deferred.promise();
+            options.forEach((opts, index, arr) => {
+                let dfd = $.Deferred();
+
+                opts = formatOptions(this.defaultUrl, opts, getAll, getFiles);
+                listData[opts.list] = listData[opts.list] || {};
+
+                makeRequest(opts, listData[opts.list], dfd);
+
+                dfd.promise().then(() => {
+                    if (Object.keys(listData).length == arr.length) {
+                        deferred.resolve(listData);
+                    }
+                });
+            });
+
+            return deferred.promise();
+        } else {
+            options = formatOptions(this.defaultUrl, options, getAll, getFiles);
+
+            let deferred = $.Deferred();
+            makeRequest(options, {}, deferred);
+            return deferred.promise();
+        }
     }
 
     add(options) {

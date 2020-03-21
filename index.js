@@ -14,6 +14,11 @@ export default class SPRequest {
 
         if (this.defaultUrl) this.lists = new Lists(this.defaultUrl);
     }
+
+    updateDefaultUrl(defaultUrl) {
+        this.defaultUrl = defaultUrl;
+        this.lists.defaultUrl = defaultUrl;
+    }
 }
 
 export const spRequest = new SPRequest();

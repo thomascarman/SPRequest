@@ -29,7 +29,7 @@ export default class List {
                     getFiles
                 );
                 promises[index] = () => {
-                    let dfd = new $.Deferred();
+                    let dfd = $.Deferred();
                     makeRequest(fOptions[index], {}, dfd);
                     return dfd.promise();
                 };
@@ -55,7 +55,7 @@ export default class List {
         } else {
             options = formatOptions(this.defaultUrl, options, getAll, getFiles);
 
-            let deferred = new $.Deferred();
+            let deferred = $.Deferred();
             makeRequest(options, {}, deferred);
             return deferred.promise();
         }

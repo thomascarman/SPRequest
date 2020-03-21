@@ -14,7 +14,7 @@ export default class List {
         getFiles?: string | boolean
     ) {
         if (Array.isArray(options)) {
-            let deferred = new $.Deferred();
+            let deferred = $.Deferred();
             let listData = {},
                 promises = [],
                 fOptions = [],

@@ -1,10 +1,14 @@
 {
-    "name": "SPRequest",
+    "name": "sprequest",
     "version": "0.0.0",
     "private": false,
     "dependencies": {},
     "devDependencies": {
         "@types/jquery": "^3.3.33",
         "@types/sharepoint": "^2016.1.8"
-    }
+    },
+    "description": "This library is used to make SharePoint API request simpler.",
+    "main": "index.js",
+    "author": "Thomas Carman",
+    "license": "ISC"
 }

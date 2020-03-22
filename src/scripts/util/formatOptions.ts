@@ -1,11 +1,22 @@
 import * as util from "util/utilities";
 export interface Options {
     list: string;
+    title?: string;
     data?: {
         __metadata?: object;
         [key: string]: any;
     };
-    [key: string]: any;
+    baseUrl?: string;
+    url?: string;
+    type?: string;
+    select?: string;
+    expand?: string;
+    filter?: string;
+    order?: string;
+    top?: string | number;
+    getAll?: boolean | string;
+    getFiles?: boolean | string;
+    id?: string | number;
 }
 
 export const formatOptions = (
@@ -37,7 +48,7 @@ export const formatOptions = (
     options.expand = options.expand ? options.expand : "";
     options.filter = options.filter ? options.filter : "";
     options.order = options.order ? options.order : "";
-    options.top = options.top ? options.top : "100";
+    options.top = options.top ? options.top : 100;
     options.getAll = options.getAll
         ? options.getAll
         : getAll && typeof getAll === "boolean"

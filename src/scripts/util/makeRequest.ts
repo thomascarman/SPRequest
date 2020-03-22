@@ -1,8 +1,8 @@
 import { Options } from "formatOptions";
 
 interface Request {
-    url: string;
-    type: string;
+    url?: string;
+    type?: string;
     headers: {
         Accept: string;
         "Content-Type": string;

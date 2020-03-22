@@ -8,14 +8,9 @@
     </head>
     <body>
         <div id="app"></div>
-        <script type="module">
-            import { spRequest as spReq } from "../siteassets/app/sprequest/index.js";
-
-            spReq.lists
-                .get({
-                    list: "TestList"
-                })
-                .then(data => console.log(data));
-        </script>
+        <script
+            data-main="../siteassets/app/sprequest/index.js"
+            src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        ></script>
     </body>
 </html>

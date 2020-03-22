@@ -1,7 +1,21 @@
 import { Options } from "formatOptions";
 
 interface Request {
-    [key: string]: any;
+    url: string;
+    type: string;
+    headers: {
+        Accept: string;
+        "Content-Type": string;
+        "X-RequestDigest"?: any;
+        "IF-MATCH"?: string;
+        "X-HTTP-Method"?: string;
+    };
+    data?: string;
+    id?: number | string;
+    success: (data: {
+        d: { [x: string]: any; results: any; Title: any; Id: any };
+    }) => void;
+    error: (XMLHttpRequest: any, textStatus: any, errorThrown: any) => void;
 }
 
 class ItemList {
@@ -63,7 +77,9 @@ export const makeRequest = (
             }
         },
         error: (XMLHttpRequest: any, textStatus: any, errorThrown: any) => {
-            deferred.reject(new Error(`${textStatus}: ${errorThrown}`));
+            deferred.reject(
+                new Error(`${textStatus}: ${errorThrown} - ${XMLHttpRequest}`)
+            );
         }
     };
 

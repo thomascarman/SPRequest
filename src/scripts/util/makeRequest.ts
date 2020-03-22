@@ -19,8 +19,8 @@ class ItemList {
 
 export const makeRequest = (
     options: Options,
-    items: ItemList,
-    deferred: any
+    items: any,
+    deferred: JQuery.Deferred<any, any, any>
 ) => {
     const request: Request = {
         url: options.url,

@@ -1,4 +1,4 @@
-import { Options } from "./formatOptions";
+import { Options } from "formatOptions";
 
 interface Request {
     [key: string]: any;

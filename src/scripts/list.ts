@@ -1,5 +1,5 @@
-import { makeRequest } from "./util/makeRequest";
-import { formatOptions, Options } from "./util/formatOptions";
+import { makeRequest } from "util/makeRequest";
+import { formatOptions, Options } from "util/formatOptions";
 
 export default class List {
     defaultUrl: string;

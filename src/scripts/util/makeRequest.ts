@@ -29,6 +29,20 @@ class ItemList {
         this.List = items.List;
         this.Items = items.Items;
     }
+
+    setRelation(header: string, linkedList: ItemList): any[] {
+        let updated = [];
+        for (let i in this.Items) {
+            if (this.Items[i][header]) {
+                this.Items[i][header] = {
+                    id: this.Items[i][header],
+                    linkedList: linkedList.Items[this.Items[i][header]]
+                };
+                updated.push(this.Items[i]);
+            }
+        }
+        return updated;
+    }
 }
 
 export const makeRequest = (

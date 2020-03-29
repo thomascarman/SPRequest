@@ -16,6 +16,7 @@ export interface Options {
     top?: string | number;
     getAll?: boolean | string;
     getFiles?: boolean | string;
+    getDeferred?: boolean;
     id?: string | number;
 }
 
@@ -23,7 +24,8 @@ export const formatOptions = (
     defaultUrl: string,
     options: string | Options,
     getAll?: string | boolean,
-    getFiles?: string | boolean
+    getFiles?: string | boolean,
+    getDeferred?: boolean
 ) => {
     if (!options || options === "" || options === "lists") {
         options = {
@@ -57,6 +59,11 @@ export const formatOptions = (
     options.getFiles = options.getFiles
         ? options.getFiles
         : getFiles || getFiles == "files"
+        ? true
+        : false;
+    options.getDeferred = options.getDeferred
+        ? options.getDeferred
+        : getDeferred && typeof getDeferred === "boolean"
         ? true
         : false;
 

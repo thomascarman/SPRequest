@@ -4,6 +4,8 @@ This library is used to make SharePoint API request simpler.
 
 ## Usage / Examples
 
+### Importing
+
 There are 2 options initializing the scripts. If no url defined it will try to use the SharePoint URL available.
 
 ```js
@@ -16,6 +18,10 @@ const spReq = new SPRequest("URL");
 // Or use the predefined value spRequest. Uses "_spPageContextInfo.siteAbsoluteUrl" as default url.
 import { spRequest as spReq } from "SPRequest";
 ```
+
+---
+
+### Get Method
 
 To get a list data. By default you will receive up to 100 items.
 
@@ -34,7 +40,7 @@ spReq.lists.get("ListName", "files");
 spReq.lists.get("ListName", true, true);
 ```
 
-You can also pass objects and arrays to SPRequest's get method.
+You can also pass objects and arrays to the get method.
 
 ```js
 spReq.lists.get({ list: "ListName" });
@@ -48,7 +54,7 @@ spReq.lists.get([
 ]);
 ```
 
-SPRequest returns a promise. Use can then/catch to deal with results.
+SPRequest returns a promise. You can use then/catch to deal with results.
 
 ```js
 spReq.lists

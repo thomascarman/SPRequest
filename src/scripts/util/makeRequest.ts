@@ -31,7 +31,7 @@ class ItemList {
     }
 
     setRelation(header: string, linkedList: ItemList): any[] {
-        let updated = [];
+        let updated: any[] = [];
         for (let i in this.Items) {
             if (this.Items[i][header]) {
                 this.Items[i][header] = {

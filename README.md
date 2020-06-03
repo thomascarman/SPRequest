@@ -33,3 +33,12 @@ spReq.lists.get("ListName", "files");
 // Get all file's info
 spReq.lists.get("ListName", true, true);
 ```
+
+SPRequest returns a promise. Use can then/catch to deal with results.
+
+```js
+spReq.lists
+    .get("ListName")
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+```

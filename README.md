@@ -17,10 +17,10 @@ const spReq = new SPRequest("URL");
 import { spRequest as spReq } from "SPRequest";
 ```
 
-To get a list's data. By default you will receive up to 100 items.
+To get a list data. By default you will receive up to 100 items.
 
 ```js
-// Get first 100
+// Get the first 100 of a given list
 spReq.lists.get("ListName");
 
 // Get all items

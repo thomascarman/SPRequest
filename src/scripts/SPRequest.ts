@@ -5,15 +5,18 @@ export default class SPRequest {
     lists: List;
 
     constructor(defaultUrl?: string) {
-        if (!defaultUrl || defaultUrl === "") {
-            if (_spPageContextInfo) {
-                this.defaultUrl = _spPageContextInfo.siteAbsoluteUrl;
+        this.defaultUrl = location.origin;
+        try {
+            if (!defaultUrl || defaultUrl === "") {
+                if (_spPageContextInfo) {
+                    this.defaultUrl = _spPageContextInfo.siteAbsoluteUrl;
+                } else {
+                    throw new Error("Unable to get site URL.");
+                }
             } else {
-                throw new Error("Unable to get site URL.");
+                this.defaultUrl = defaultUrl;
             }
-        } else {
-            this.defaultUrl = defaultUrl;
-        }
+        } catch (error) {}
 
         this.lists = new List(this.defaultUrl);
     }

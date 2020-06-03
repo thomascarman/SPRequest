@@ -10,11 +10,11 @@ There are 2 options initializing the scripts. If no url defined it will try to u
 // If URL is undefined it will use the SharePoint URL available
 
 // create a new instance passing in a desired url.
-import SPRequest from "../siteassets/app/sprequest/index.js";
+import SPRequest from "SPRequest";
 const spReq = new SPRequest("URL");
 
-// Or use the predefined value spRequest
-import { spRequest as spReq } from "../siteassets/app/sprequest/index.js";
+// Or use the predefined value spRequest. Uses "_spPageContextInfo.siteAbsoluteUrl" as default url.
+import { spRequest as spReq } from "SPRequest";
 ```
 
 To get a list's data. By default you will receive up to 100 items.

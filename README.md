@@ -21,6 +21,16 @@ import { spRequest as spReq } from "SPRequest";
 
 ---
 
+### UpdateDefaultUrl Method
+
+Used to change the default base url used by all methods. Useful if using the predefined SPRequest or getting all data from a diffrent sharepoint site or subsite.
+
+```javascript
+spReq.updateDefaultUrl("URL");
+```
+
+---
+
 ### Get Method
 
 Used to make a request to sharepoint API to get list data. This method returns a promise. You can use then/catch to deal with results.

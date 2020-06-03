@@ -58,7 +58,7 @@ export const formatOptions = (
         : false;
     options.getFiles = options.getFiles
         ? options.getFiles
-        : getFiles || getFiles == "files"
+        : getAll || getFiles == "files"
         ? true
         : false;
     options.getDeferred = options.getDeferred

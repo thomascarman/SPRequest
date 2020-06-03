@@ -29,8 +29,8 @@ Used to make a request to sharepoint API to get list data. This method returns a
 
 ```js
 // Get the first 100 of a given list
-spReq.lists.get("ListName")
-.get("ListName")
+spReq.lists
+    .get("ListName")
     .then(data => console.log(data))
     .catch(err => console.log(err));
 

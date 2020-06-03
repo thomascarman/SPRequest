@@ -23,11 +23,16 @@ import { spRequest as spReq } from "SPRequest";
 
 ### Get Method
 
-To get a list data. By default you will receive up to 100 items.
+Used to make a request to sharepoint API to get list data. This method returns a promise. You can use then/catch to deal with results.
+
+#### Usage example
 
 ```js
 // Get the first 100 of a given list
-spReq.lists.get("ListName");
+spReq.lists.get("ListName")
+.get("ListName")
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 
 // Get all items
 spReq.lists.get("ListName", true);
@@ -52,15 +57,6 @@ spReq.lists.get([
     },
     "ListName2"
 ]);
-```
-
-SPRequest returns a promise. You can use then/catch to deal with results.
-
-```js
-spReq.lists
-    .get("ListName")
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
 ```
 
 #### Options

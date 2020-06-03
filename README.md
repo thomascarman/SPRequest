@@ -62,3 +62,17 @@ spReq.lists
     .then(data => console.log(data))
     .catch(err => console.log(err));
 ```
+
+#### Options
+
+| Property | Type    | Default | Example                                         | Discription                                                                                                               |
+| -------- | ------- | ------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| list     | String  | "lists" | "ListName"                                      | The name of the list.                                                                                                     |
+| baseUrl  | String  | null    | "/subsite"                                      | Get list from a subsite from your default url.                                                                            |
+| select   | String  | null    | "ID,Title,Created,LookupColumn"                 | Select individual column(s) of the request list.                                                                          |
+| expand   | String  | null    | "LookupColumn/Title"                            | Expand to get data from any lookup column(s).                                                                             |
+| filter   | String  | null    | "Created ge datetime'2020-01-15T00:00:00.000Z'" | Apply filter to data being collected.                                                                                     |
+| getAll   | Boolean | false   | false                                           | Promises will be deferred to get all. <br/> **Note**: Use "top" to limit the number of requests.                          |
+| getFiles | Boolean | false   | false                                           | Get file info from a document library.                                                                                    |
+| order    | String  | null    | "Created desc"<br/> _get new items_             | The order that the data will be collected. <br/> **Note**: This is not to sort the data just the order they are received. |
+| top      | Number  | 100     | 10                                              | Get "X" number of items. <br/> **Note**: Used with "getAll" set batch size for each deferred promise.                     |

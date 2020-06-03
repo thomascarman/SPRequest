@@ -34,6 +34,20 @@ spReq.lists.get("ListName", "files");
 spReq.lists.get("ListName", true, true);
 ```
 
+You can also pass objects and arrays to SPRequest's get method.
+
+```js
+spReq.lists.get({ list: "ListName" });
+
+spReq.lists.get([
+    {
+        list: "ListName",
+        baseUrl: "/subsite"
+    },
+    "ListName2"
+]);
+```
+
 SPRequest returns a promise. Use can then/catch to deal with results.
 
 ```js

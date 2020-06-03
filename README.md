@@ -26,7 +26,10 @@ spReq.lists.get("ListName");
 // Get all items
 spReq.lists.get("ListName", true);
 
-// Get file info from document library
+// Get file's info from document library (top 100)
 spReq.lists.get("ListName", false, true);
 spReq.lists.get("ListName", "files");
+
+// Get all file's info
+spReq.lists.get("ListName", true, true);
 ```

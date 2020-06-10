@@ -41,7 +41,8 @@ export const formatOptions = (
     }
 
     if (options.data) {
-        options.data.__metadata = util.GetItemTypeForListName(options.list);
+        if (!options.data.__metadata)
+            options.data.__metadata = util.GetItemTypeForListName(options.list);
     }
 
     options.baseUrl = options.baseUrl ? options.baseUrl : defaultUrl;

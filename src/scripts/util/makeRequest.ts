@@ -23,11 +23,11 @@ class ItemList {
     List?: string;
     Items?: any;
     Results?: any;
+    Id?: number | string;
+    [prop: string]: any;
 
-    constructor(items: { Title?: string; List?: string; Items?: Object }) {
-        this.Title = items.Title;
-        this.List = items.List;
-        this.Items = items.Items;
+    constructor(items: any) {
+        for (let i in items) this[i] = items[i];
     }
 
     setRelation(header: string, linkedList: ItemList): any[] {

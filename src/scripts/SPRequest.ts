@@ -1,8 +1,6 @@
-import List from "list";
-
-export default class SPRequest {
+class SPRequest {
     defaultUrl: string;
-    lists: List;
+    lists: List.List;
 
     constructor(defaultUrl?: string) {
         this.defaultUrl = location.origin;
@@ -18,7 +16,7 @@ export default class SPRequest {
             }
         } catch (error) {}
 
-        this.lists = new List(this.defaultUrl);
+        this.lists = new List.List(this.defaultUrl);
     }
 
     updateDefaultUrl(defaultUrl: string) {
@@ -26,5 +24,3 @@ export default class SPRequest {
         this.lists.defaultUrl = defaultUrl;
     }
 }
-
-export const spRequest = new SPRequest();

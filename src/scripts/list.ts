@@ -39,7 +39,9 @@ module List {
                     promises.forEach((promise, index) => {
                         promise().then((data: any) => {
                             listData[
-                                fOptions[index].title || fOptions[index].list
+                                fOptions[index].title ||
+                                    fOptions[index].name ||
+                                    fOptions[index].list
                             ] = data;
                             fulfulled++;
                             if (fulfulled === optLen) {

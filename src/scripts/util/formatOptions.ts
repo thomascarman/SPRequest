@@ -18,6 +18,7 @@ module FormateOptions {
         getFiles?: boolean | string;
         getDeferred?: boolean;
         id?: string | number;
+        name?: string;
     }
 
     export const formatOptions = (
@@ -94,6 +95,8 @@ module FormateOptions {
             options.list === "currentuser"
         ) {
             options.url = `${options.baseUrl}/_api/web/${options.list}`;
+            if (options.list === "sitegroups" && options.name)
+                options.url += `/getbyname('${options.name}')/Users`;
         } else if (options.list === "lists") {
             options.url = `${options.baseUrl}/_api/web/lists`;
         }

@@ -61,13 +61,17 @@ module MakeRequest {
             }) => {
                 if (data && data.d) {
                     const results = data.d.results;
-                    items["Title"] = options.title || options.list;
+                    items["Title"] =
+                        options.title || options.name || options.list;
                     items["List"] = options.list;
 
                     if (!results) {
                         items["Results"] = data.d;
                         items["Title"] =
-                            options.title || data.d.Title || data.d.Id;
+                            options.title ||
+                            data.d.Title ||
+                            options.name ||
+                            data.d.Id;
                     } else {
                         for (let i in results) {
                             items["Items"] = items["Items"] || {};

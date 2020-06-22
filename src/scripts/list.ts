@@ -74,20 +74,70 @@ module List {
 
                 throw error;
             } else {
-                if (!options.data || !options.list) {
+                if (
+                    !Array.isArray(options) &&
+                    (!options.data || !options.list)
+                ) {
                     throw new Error(
                         "Include List name and data to be added. See Documentation at https://github.com/thomascarman/SPRequest."
                     );
                 } else {
-                    options.type = "POST";
-                    options = FormateOptions.formatOptions(
-                        this.defaultUrl,
-                        options
-                    );
+                    if (Array.isArray(options)) {
+                        let deferred = $.Deferred();
+                        let listData: any = {},
+                            promises: any[] = [],
+                            fOptions: FormateOptions.Options[] = [],
+                            fulfulled = 0,
+                            optLen = options.length;
 
-                    let deferred = $.Deferred();
-                    MakeRequest.makeRequest(options, {}, deferred);
-                    return deferred.promise();
+                        options.forEach((opts, index) => {
+                            opts.type = "POST";
+                            fOptions[index] = FormateOptions.formatOptions(
+                                this.defaultUrl,
+                                opts
+                            );
+                            promises[index] = () => {
+                                let dfd = $.Deferred();
+                                MakeRequest.makeRequest(
+                                    fOptions[index],
+                                    {},
+                                    dfd
+                                );
+                                return dfd.promise();
+                            };
+                        });
+
+                        if (optLen === 0) {
+                            deferred.resolve(listData);
+                        } else {
+                            promises.forEach((promise, index) => {
+                                promise().then((data: any) => {
+                                    listData[
+                                        data.Title ||
+                                            fOptions[index].title ||
+                                            fOptions[index].name ||
+                                            fOptions[index].list
+                                    ] = data;
+                                    fulfulled++;
+                                    if (fulfulled === optLen) {
+                                        deferred.resolve(listData);
+                                    }
+                                });
+                            });
+                        }
+
+                        return deferred.promise();
+                    } else {
+                        options.type = "POST";
+                        options = FormateOptions.formatOptions(
+                            this.defaultUrl,
+                            options
+                        );
+
+                        let deferred = $.Deferred();
+                        MakeRequest.makeRequest(options, {}, deferred);
+                        return deferred.promise();
+                    }
                 }
             }
         }

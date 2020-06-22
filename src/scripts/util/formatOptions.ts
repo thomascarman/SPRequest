@@ -42,10 +42,17 @@ module FormateOptions {
         }
 
         if (options.data) {
-            if (!options.data.__metadata)
-                options.data.__metadata = Utillities.GetItemTypeForListName(
-                    options.list
-                );
+            if (!options.data.__metadata) {
+                if (options.list === "sitegroups" && options.name) {
+                    options.data.__metadata = {
+                        type: "SP.User"
+                    };
+                } else {
+                    options.data.__metadata = Utillities.GetItemTypeForListName(
+                        options.list
+                    );
+                }
+            }
         }
 
         options.baseUrl = options.baseUrl ? options.baseUrl : defaultUrl;

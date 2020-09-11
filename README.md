@@ -2,6 +2,19 @@
 
 This library is used to make SharePoint API request simpler.
 
+## Table of Contents
+
+-   [Technologies](#Technologies)
+-   [Setup](#Setup)
+-   [Usage / Examples](#Usage-/-Examples)
+
+## Technologies
+
+-   jQuery/Ajax
+-   Sharepoint Rest API
+
+## Setup
+
 ## Usage / Examples
 
 ### Importing

@@ -3,6 +3,9 @@
     "version": "0.0.0",
     "private": false,
     "dependencies": {},
+    "scripts": {
+        "build": "node node_modules/typescript/bin/tsc -w"
+    },
     "devDependencies": {
         "@types/jquery": "^3.3.33",
         "@types/sharepoint": "^2016.1.8"
